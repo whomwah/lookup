@@ -8,7 +8,7 @@
          <item>
             <title>Version 1.0 (Initial Import)</title>
             <sparkle:releaseNotesLink>
-              http://svn.ips.radio.bbc.co.uk/rmi_svn/tags/experiments/cocoa_apps/Lookup/1.0/CHANGELOG
+              http://svn.ips.radio.bbc.co.uk/rmi_svn/tags/experiments/cocoa_apps/Lookup/release-1.0/CHANGELOG
             </sparkle:releaseNotesLink>
             <pubDate>Tue, 17 Feb 2009 14:37:00 +0000</pubDate>
             <enclosure url="http://svn.ips.radio.bbc.co.uk/rmi_svn/trunk/experiments/cocoa_apps/Lookup/releases/latest/Lookup.dmg" sparkle:version="1.0" length="1237293" type="application/octet-stream" sparkle:dsaSignature="MCwCFDkUE+N4q0YV8JpqRa7j4uB8FEruAhQ7ZmkOcjSHR5GBF9WMmpypGLJG/w==" />
