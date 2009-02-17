@@ -2,16 +2,16 @@
 <rss version="2.0" xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle"  xmlns:dc="http://purl.org/dc/elements/1.1/">
    <channel>
       <title>Lookup Changelog</title>
-      <link>.xml</link>
-      <description>Most recent changes with links to updates.</description>
+      <link>http://svn.ips.radio.bbc.co.uk/rmi_svn/trunk/experiments/cocoa_apps/Lookup/releases.xml</link>
+      <description>Most recent changes to Lookup with links to updates.</description>
       <language>en</language>
          <item>
             <title>Version 1.0 (Initial Import)</title>
             <sparkle:releaseNotesLink>
-              http://svn.ips.radio.bbc.co.uk/rmi_svn/trunk/experiments/cocoa_apps/Lookup/CHANGELOG
+              http://svn.ips.radio.bbc.co.uk/rmi_svn/tags/experiments/cocoa_apps/Lookup/1.0/CHANGELOG
             </sparkle:releaseNotesLink>
-            <pubDate>Thu, 12 Feb 2009 14:37:00 +0000</pubDate>
-            <enclosure url="http://github.com/whomwah/radioaunty/raw/1.8/releases/1.0/RadioAunty.dmg" sparkle:version="1.0" length="" type="application/octet-stream" sparkle:dsaSignature="" />
+            <pubDate>Tue, 17 Feb 2009 14:37:00 +0000</pubDate>
+            <enclosure url="http://svn.ips.radio.bbc.co.uk/rmi_svn/trunk/experiments/cocoa_apps/Lookup/releases/latest/Lookup.dmg" sparkle:version="1.0" length="1237293" type="application/octet-stream" sparkle:dsaSignature="MCwCFDkUE+N4q0YV8JpqRa7j4uB8FEruAhQ7ZmkOcjSHR5GBF9WMmpypGLJG/w==" />
          </item>
    </channel>
 </rss>

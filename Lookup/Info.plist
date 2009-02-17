@@ -9,7 +9,7 @@
 	<key>CFBundleIconFile</key>
 	<string>bbclookup</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.whomwah.Lookup</string>
+	<string>com.whomwah.bbcLookup</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
