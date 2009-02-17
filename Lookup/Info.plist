@@ -33,7 +33,7 @@
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
 	<key>SUFeedURL</key>
-	<string>http://github.com/whomwah/abfinder/raw/master/abfinder.xml</string>
+	<string>http://svn.ips.radio.bbc.co.uk/rmi_svn/trunk/experiments/cocoa_apps/Lookup/releases.xml</string>
 	<key>SUPublicDSAKeyFile</key>
 	<string>dsa_pub.pem</string>
 </dict>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle"  xmlns:dc="http://purl.org/dc/elements/1.1/">
+   <channel>
+      <title>Lookup Changelog</title>
+      <link>.xml</link>
+      <description>Most recent changes with links to updates.</description>
+      <language>en</language>
+         <item>
+            <title>Version 1.0 (Initial Import)</title>
+            <sparkle:releaseNotesLink>
+              http://svn.ips.radio.bbc.co.uk/rmi_svn/trunk/experiments/cocoa_apps/Lookup/CHANGELOG
+            </sparkle:releaseNotesLink>
+            <pubDate>Thu, 12 Feb 2009 14:37:00 +0000</pubDate>
+            <enclosure url="http://github.com/whomwah/radioaunty/raw/1.8/releases/1.0/RadioAunty.dmg" sparkle:version="1.0" length="" type="application/octet-stream" sparkle:dsaSignature="" />
+         </item>
+   </channel>
+</rss>
