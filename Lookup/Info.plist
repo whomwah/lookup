@@ -25,7 +25,7 @@
 	<key>DSRBaseSearch</key>
 	<string>DC=national,DC=core,DC=bbc,DC=co,DC=uk</string>
 	<key>DSRLdapServer</key>
-	<string>national.core.bbc.co.uk</string>
+	<string>ldap.national.core.bbc.co.uk</string>
 	<key>DSRMaxResults</key>
 	<string>500</string>
 	<key>NSMainNibFile</key>
