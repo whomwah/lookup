@@ -15,7 +15,6 @@ extern NSString * const DRSSearchString;
 
 @interface MyController : NSWindowController {
   NSMutableArray *contactList;
-  NSPasteboard *pb;
   
   IBOutlet NSTableView *contactTable;
   IBOutlet NSSearchField *searchField;
@@ -26,8 +25,6 @@ extern NSString * const DRSSearchString;
 @property(nonatomic, retain) NSMutableArray *contactList;
 
 - (IBAction)startSearch:(id)sender;
-- (IBAction)copy:(id)sender;
-- (IBAction)paste:(id)sender;
 - (void)updateStatusTextWith:(NSString*)str;
 
 @end

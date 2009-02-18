@@ -30,26 +30,6 @@ NSString * const DRSSearchString = @"SearchString";
 - (void) awakeFromNib {	
 	MyCell *cell = [[[MyCell alloc] init] autorelease];
 	[[contactTable tableColumnWithIdentifier:@"theTableColumn"] setDataCell:cell];
-  
-  pb = [NSPasteboard generalPasteboard];
-  NSArray *types = [NSArray arrayWithObjects:NSStringPboardType, nil];
-  [pb declareTypes:types owner:self];
-}
-
-- (IBAction)copy:(id)sender
-{
-  [pb setString:[[contactList objectAtIndex:[contactTable selectedRow]] stringRepresentation] forType:NSStringPboardType];
-}
-
-- (IBAction)paste:(id)sender
-{
-  NSArray *pasteTypes = [NSArray arrayWithObjects:NSStringPboardType, nil];
-  NSString *bestType = [pb availableTypeFromArray:pasteTypes];
-  if (bestType != nil && [pb stringForType:NSStringPboardType]) {
-    [searchField setStringValue:[pb stringForType:NSStringPboardType]];
-  } else {
-    NSBeep();
-  }
 }
 
 - (IBAction)startSearch:(id)sender
@@ -57,14 +37,12 @@ NSString * const DRSSearchString = @"SearchString";
   NSString *searchString = [sender stringValue];
   [self updateStatusTextWith:@""];
   
-  if ([searchString isEqualToString:@""] == YES) {
-    NSLog(@"Do nothing!");  
-  } else {
+  if ([searchString isEqualToString:@""] == NO) {
     [contactList removeAllObjects];
     self.contactList = contactList;
     [pi startAnimation:sender];
     NSTask *task = [[NSTask alloc] init];
-
+/*
     [task setLaunchPath:@"/usr/bin/ldapsearch"];
     
     NSString *cmdString = [NSString stringWithFormat:[[NSUserDefaults standardUserDefaults] stringForKey:DRSSearchString], 
@@ -77,76 +55,92 @@ NSString * const DRSSearchString = @"SearchString";
                      @"-b", [[NSUserDefaults standardUserDefaults] stringForKey:DSRBaseSearch],
                      cmdString, @"displayName", @"mail", @"mailNickname", @"title", @"telephoneNumber", @"employeeID",
                      nil];
+*/
+    [task setLaunchPath:@"/bin/cat"];
+    NSArray *args = [NSArray arrayWithObjects:@"/Users/duncan/dump.txt", nil];
 
-    //[task setLaunchPath:@"/bin/cat"];
-    //NSArray *args = [NSArray arrayWithObjects:@"/Users/duncan/dump.txt", nil];
+    NSPipe *outpipe = [[NSPipe alloc] init];
+    NSPipe *errorOutpipe = [[NSPipe alloc] init];
     
     [task setArguments:args];
-    
-    NSPipe *outpipe = [[NSPipe alloc] init];
     [task setStandardOutput:outpipe];
+    [task setStandardError:errorOutpipe];
     [outpipe release];
-    
+    [errorOutpipe release];
     [task launch];
     
     NSData *data = [[outpipe fileHandleForReading] readDataToEndOfFile];
+    NSData *errorData = [[errorOutpipe fileHandleForReading] readDataToEndOfFile];
     
     [task waitUntilExit];
     int status = [task terminationStatus];
     
     if (status == 0) {
-      NSLog(@"Task succeeded..");
-    } else {
-      NSLog(@"Task failed!");
-    }
-    
-    NSString *aString = [[NSString alloc] initWithData:data
-                                              encoding:NSUTF8StringEncoding];
-    
-    [task release];
-    [pi stopAnimation:sender];
-    
-    Contact *c;
-    NSMutableDictionary *contactDict = [NSMutableDictionary dictionary];
-    int has_result = 0;
-    
-    NSArray *lines = [aString componentsSeparatedByString:@"\n\n"];
-    
-    for (NSString *line in lines) {
-      NSArray *fields = [line componentsSeparatedByString:@"\n"];
-      for (NSString *field in fields) {
-        NSArray *keys = [NSArray arrayWithObjects:@"displayName", @"mail", @"title", 
-                         @"telephoneNumber", @"mailNickname", @"employeeID", nil];
-        
-        for (NSString *key in keys) {
-          if ([field hasPrefix:[key stringByAppendingString:@": "]] == YES) {
-            NSString *str = [field stringAfterSeparator:@": "];
-            if ([str length] < 2)
-              str = nil;
-            
-            [contactDict setValue:str forKey:key];
-            has_result = 1;
-          }  
+      
+      NSLog(@"Success..results found");
+      NSString *aString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+      
+      [task release];
+      [pi stopAnimation:sender];
+      
+      Contact *c;
+      NSMutableDictionary *contactDict = [NSMutableDictionary dictionary];
+      int has_result = 0;
+      
+      NSArray *lines = [aString componentsSeparatedByString:@"\n\n"];
+      
+      for (NSString *line in lines) {
+        NSArray *fields = [line componentsSeparatedByString:@"\n"];
+        for (NSString *field in fields) {
+          NSArray *keys = [NSArray arrayWithObjects:@"displayName", @"mail", @"title", 
+                           @"telephoneNumber", @"mailNickname", @"employeeID", nil];
+          
+          for (NSString *key in keys) {
+            if ([field hasPrefix:[key stringByAppendingString:@": "]] == YES) {
+              NSString *str = [field stringAfterSeparator:@": "];
+              if ([str length] < 2)
+                str = nil;
+              
+              [contactDict setValue:str forKey:key];
+              has_result = 1;
+            }  
+          }
         }
+        
+        if (has_result == 1 && 
+            [contactDict valueForKey:@"displayName"] &&
+            [contactDict valueForKey:@"mail"] &&
+            [[contactDict valueForKey:@"displayName"] hasPrefix:@"_"] == NO &&
+            [[contactDict valueForKey:@"displayName"] hasPrefix:@"System"] == NO) {
+          c = [[Contact alloc] initWithContactDict:contactDict];
+          [contactList addObject:c];
+          [c release];
+          [contactDict removeAllObjects];
+        }
+        
+        has_result = 0;
       }
       
-      if (has_result == 1 && 
-          [contactDict valueForKey:@"displayName"] &&
-          [contactDict valueForKey:@"mail"] &&
-          [[contactDict valueForKey:@"displayName"] hasPrefix:@"_"] == NO &&
-          [[contactDict valueForKey:@"displayName"] hasPrefix:@"System"] == NO) {
-        c = [[Contact alloc] initWithContactDict:contactDict];
-        [contactList addObject:c];
-        [c release];
-        [contactDict removeAllObjects];
-      }
+      self.contactList = contactList;    
+      [self updateStatusTextWith:[NSString stringWithFormat:@"%d results found", [contactList count]]];
+      [aString release];
       
-      has_result = 0;
+    } else {
+      
+      NSAlert *alert = [[[NSAlert alloc] init] autorelease];
+      NSString *err = [[NSString alloc] initWithData:errorData encoding:NSUTF8StringEncoding];
+      
+      [pi stopAnimation:sender];
+      [alert addButtonWithTitle:@"OK"];
+      [alert setMessageText:@"Oops! something broke?"];
+      [alert setInformativeText:[NSString stringWithFormat:@"%@", err]];
+      [alert setAlertStyle:NSWarningAlertStyle];
+      [alert beginSheetModalForWindow:[contactTable window]
+                        modalDelegate:self 
+                       didEndSelector:nil 
+                          contextInfo:nil];
+      [err release];
     }
-      
-    self.contactList = contactList;    
-    [self updateStatusTextWith:[NSString stringWithFormat:@"%d results found", [contactList count]]];
-    [aString release];
   }
 }
 

@@ -47,4 +47,19 @@
     }
 }
 
+- (IBAction)copy:(id)sender
+{
+  NSPasteboard *pb = [NSPasteboard generalPasteboard];
+  [self writeToPasteboard:pb];
+}
+
+- (void)writeToPasteboard:(NSPasteboard*)pb
+{
+  NSString *str = [[[[self tableColumnWithIdentifier:@"theTableColumn"] 
+      dataCellForRow:[self selectedRow]] objectValue] stringRepresentation];
+  
+  [pb declareTypes:[NSArray arrayWithObject:NSStringPboardType] owner:self];
+  [pb setString:str forType:NSStringPboardType];
+}
+
 @end
