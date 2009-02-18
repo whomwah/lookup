@@ -1,3 +1,10 @@
+*1.1.0* (Feb 18th, 2009)
+ 
+* fix an ldap problem people were having
+  on the BBC desktop
+* added better error handling
+* fixed copy and paste 
+
 *1.0.0* (Feb 17th, 2009)
  
 * initial release

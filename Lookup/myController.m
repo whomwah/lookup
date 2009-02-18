@@ -42,7 +42,7 @@ NSString * const DRSSearchString = @"SearchString";
     self.contactList = contactList;
     [pi startAnimation:sender];
     NSTask *task = [[NSTask alloc] init];
-/*
+
     [task setLaunchPath:@"/usr/bin/ldapsearch"];
     
     NSString *cmdString = [NSString stringWithFormat:[[NSUserDefaults standardUserDefaults] stringForKey:DRSSearchString], 
@@ -55,9 +55,9 @@ NSString * const DRSSearchString = @"SearchString";
                      @"-b", [[NSUserDefaults standardUserDefaults] stringForKey:DSRBaseSearch],
                      cmdString, @"displayName", @"mail", @"mailNickname", @"title", @"telephoneNumber", @"employeeID",
                      nil];
-*/
-    [task setLaunchPath:@"/bin/cat"];
-    NSArray *args = [NSArray arrayWithObjects:@"/Users/duncan/dump.txt", nil];
+
+    //[task setLaunchPath:@"/bin/cat"];
+    //NSArray *args = [NSArray arrayWithObjects:@"/Users/duncan/dump.txt", nil];
 
     NSPipe *outpipe = [[NSPipe alloc] init];
     NSPipe *errorOutpipe = [[NSPipe alloc] init];
@@ -74,8 +74,11 @@ NSString * const DRSSearchString = @"SearchString";
     
     [task waitUntilExit];
     int status = [task terminationStatus];
+
+    NSString *aString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    NSString *err = [[NSString alloc] initWithData:errorData encoding:NSUTF8StringEncoding];
     
-    if (status == 0) {
+    if (status == 0 || [err hasPrefix:@"Size limit exceeded"]) {
       
       NSLog(@"Success..results found");
       NSString *aString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -123,12 +126,10 @@ NSString * const DRSSearchString = @"SearchString";
       
       self.contactList = contactList;    
       [self updateStatusTextWith:[NSString stringWithFormat:@"%d results found", [contactList count]]];
-      [aString release];
       
     } else {
       
       NSAlert *alert = [[[NSAlert alloc] init] autorelease];
-      NSString *err = [[NSString alloc] initWithData:errorData encoding:NSUTF8StringEncoding];
       
       [pi stopAnimation:sender];
       [alert addButtonWithTitle:@"OK"];
@@ -139,8 +140,10 @@ NSString * const DRSSearchString = @"SearchString";
                         modalDelegate:self 
                        didEndSelector:nil 
                           contextInfo:nil];
-      [err release];
     }
+    
+    [aString release];
+    [err release];
   }
 }
 
