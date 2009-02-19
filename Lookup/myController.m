@@ -42,7 +42,7 @@ NSString * const DRSSearchString = @"SearchString";
     self.contactList = contactList;
     [pi startAnimation:sender];
     NSTask *task = [[NSTask alloc] init];
-
+/*
     [task setLaunchPath:@"/usr/bin/ldapsearch"];
     
     NSString *cmdString = [NSString stringWithFormat:[[NSUserDefaults standardUserDefaults] stringForKey:DRSSearchString], 
@@ -55,9 +55,9 @@ NSString * const DRSSearchString = @"SearchString";
                      @"-b", [[NSUserDefaults standardUserDefaults] stringForKey:DSRBaseSearch],
                      cmdString, @"displayName", @"mail", @"mailNickname", @"title", @"telephoneNumber", @"employeeID",
                      nil];
-
-    //[task setLaunchPath:@"/bin/cat"];
-    //NSArray *args = [NSArray arrayWithObjects:@"/Users/duncan/dump.txt", nil];
+*/
+    [task setLaunchPath:@"/bin/cat"];
+    NSArray *args = [NSArray arrayWithObjects:@"/Users/duncan/dump.txt", nil];
 
     NSPipe *outpipe = [[NSPipe alloc] init];
     NSPipe *errorOutpipe = [[NSPipe alloc] init];

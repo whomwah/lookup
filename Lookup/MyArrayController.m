@@ -7,7 +7,7 @@
 //
 
 #import "MyArrayController.h"
-
+#import "Contact.h"
 
 @implementation MyArrayController
 
@@ -19,10 +19,13 @@
 	
 	if (str == nil)
 		return NO;
+  
+  NSData *data = [[[self arrangedObjects] objectAtIndex:row] vCardDataRepresentation];
 	
-	NSArray *pboardTypes = [NSArray arrayWithObjects:NSStringPboardType, nil];
+	NSArray *pboardTypes = [NSArray arrayWithObjects:NSStringPboardType, NSVCardPboardType, nil];
 	[pb declareTypes:pboardTypes owner:self];
   [pb setString:str forType:NSStringPboardType];
+  [pb setData:data forType:NSVCardPboardType];
 	
 	return YES;
 }

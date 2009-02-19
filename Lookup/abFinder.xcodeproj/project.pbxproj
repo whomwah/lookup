@@ -24,6 +24,7 @@
 		AE5ADBF40F3E0D55003BF7CC /* MyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE5ADBF30F3E0D55003BF7CC /* MyCell.m */; };
 		AEE95A580F3F7D5F00CE7329 /* NSColorAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE95A570F3F7D5F00CE7329 /* NSColorAdditions.m */; };
 		AEE95A600F3F7DCC00CE7329 /* MyTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE95A5F0F3F7DCC00CE7329 /* MyTableView.m */; };
+		AEE9FF010F4D53C1007F2D56 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEE9FF000F4D53C1007F2D56 /* AddressBook.framework */; };
 		AEFD8C830F474C690012161F /* MyArrayController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEFD8C820F474C690012161F /* MyArrayController.m */; };
 /* End PBXBuildFile section */
 
@@ -70,6 +71,7 @@
 		AEE95A570F3F7D5F00CE7329 /* NSColorAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSColorAdditions.m; sourceTree = "<group>"; };
 		AEE95A5E0F3F7DCC00CE7329 /* MyTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyTableView.h; sourceTree = "<group>"; };
 		AEE95A5F0F3F7DCC00CE7329 /* MyTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyTableView.m; sourceTree = "<group>"; };
+		AEE9FF000F4D53C1007F2D56 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = /System/Library/Frameworks/AddressBook.framework; sourceTree = "<absolute>"; };
 		AEFD8C810F474C690012161F /* MyArrayController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyArrayController.h; sourceTree = "<group>"; };
 		AEFD8C820F474C690012161F /* MyArrayController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyArrayController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -81,6 +83,7 @@
 			files = (
 				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
 				AE0B917C0F49EB0100FA18E7 /* Sparkle.framework in Frameworks */,
+				AEE9FF010F4D53C1007F2D56 /* AddressBook.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -105,6 +108,7 @@
 		1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AEE9FF000F4D53C1007F2D56 /* AddressBook.framework */,
 				AE0B917B0F49EB0100FA18E7 /* Sparkle.framework */,
 				1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */,
 			);

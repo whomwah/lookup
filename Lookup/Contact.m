@@ -53,4 +53,15 @@
   return [NSString stringWithFormat:@"%@ <%@>", self.name, self.email];
 }
 
+- (NSData*)vCardDataRepresentation
+{   
+  ABPerson *newPerson = [[[ABPerson alloc] init] autorelease];
+  [newPerson setValue:self.name forProperty:kABFirstNameProperty];
+  [newPerson setValue:self.name forProperty:kABLastNameProperty];
+  //[newPerson setValue:self.email forProperty:kABEmailProperty];
+  //[newPerson setValue:self.telephone forProperty:kABPhoneProperty];
+  NSLog(@"%@", [newPerson vCardRepresentation]);
+  return [newPerson vCardRepresentation];
+}
+
 @end

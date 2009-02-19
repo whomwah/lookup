@@ -7,7 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
-
+#import <AddressBook/AddressBook.h>
 
 @interface Contact : NSObject {
   NSString *name;
@@ -26,6 +26,7 @@
 @property(nonatomic, copy) NSString *staffid;
 
 - (id)initWithContactDict:(NSDictionary *)dict;
-- (NSString*)stringRepresentation;
+- (NSString *)stringRepresentation;
+- (NSData *)vCardDataRepresentation;
 
 @end
