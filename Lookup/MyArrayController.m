@@ -22,7 +22,7 @@
   
   NSData *data = [[[self arrangedObjects] objectAtIndex:row] vCardDataRepresentation];
 	
-	NSArray *pboardTypes = [NSArray arrayWithObjects:NSStringPboardType, NSVCardPboardType, nil];
+	NSArray *pboardTypes = [NSArray arrayWithObjects:NSVCardPboardType, nil];
 	[pb declareTypes:pboardTypes owner:self];
   [pb setString:str forType:NSStringPboardType];
   [pb setData:data forType:NSVCardPboardType];

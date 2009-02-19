@@ -10,7 +10,7 @@
 
 @implementation Contact
 
-@synthesize name, email, uid, title, telephone, staffid;
+@synthesize firstname, surname, email, uid, title, telephone, staffid, division, displayName, address;
 
 - (id)init
 {
@@ -24,9 +24,15 @@
 - (id)initWithContactDict:(NSDictionary *)dict
 {
 	if (self = [super init]) {
-    // Full Name
+    // Display Name
     if ([dict valueForKey:@"displayName"])
-      self.name = [dict valueForKey:@"displayName"];
+      self.displayName = [dict valueForKey:@"displayName"];
+    // Firstname Name
+    if ([dict valueForKey:@"givenName"])
+      self.firstname = [dict valueForKey:@"givenName"];
+    // Surname Name
+    if ([dict valueForKey:@"sn"])
+      self.surname = [dict valueForKey:@"sn"];
     // Email address
     if ([dict valueForKey:@"mail"])
       self.email = [[dict valueForKey:@"mail"] lowercaseString];
@@ -36,6 +42,9 @@
     // Telephone No
     if ([dict valueForKey:@"telephoneNumber"])
       self.telephone = [dict valueForKey:@"telephoneNumber"];
+    // Division
+    if ([dict valueForKey:@"division"])
+      self.division = [dict valueForKey:@"division"];
     // Staff ID
     if ([dict valueForKey:@"employeeID"] && [[dict valueForKey:@"employeeID"] hasPrefix:@"UNKNOWN"] == NO)
       self.staffid = [dict valueForKey:@"employeeID"];
@@ -44,11 +53,14 @@
       self.title = [dict valueForKey:@"title"];
     else
       self.title = @"Job Title Unknown";
+    // Address
+    if ([dict valueForKey:@"physicalDeliveryOfficeName"])
+      self.address = [dict valueForKey:@"physicalDeliveryOfficeName"];    
 	}
 	return self;
 }
 
-- (NSString*)stringRepresentation
+- (NSString*)stringRepresentation 
 {
   return [NSString stringWithFormat:@"%@ <%@>", self.name, self.email];
 }
@@ -56,12 +68,52 @@
 - (NSData*)vCardDataRepresentation
 {   
   ABPerson *newPerson = [[[ABPerson alloc] init] autorelease];
-  [newPerson setValue:self.name forProperty:kABFirstNameProperty];
-  [newPerson setValue:self.name forProperty:kABLastNameProperty];
-  //[newPerson setValue:self.email forProperty:kABEmailProperty];
-  //[newPerson setValue:self.telephone forProperty:kABPhoneProperty];
-  NSLog(@"%@", [newPerson vCardRepresentation]);
+  
+  [newPerson setValue:self.firstname forProperty:kABFirstNameProperty];
+  [newPerson setValue:self.surname forProperty:kABLastNameProperty];
+  [newPerson setValue:self.title forProperty:kABJobTitleProperty];
+  [newPerson setValue:@"BBC" forProperty:kABOrganizationProperty];
+  
+  if (self.division)
+    [newPerson setValue:self.division forProperty:kABDepartmentProperty];
+  
+  if (self.email) {
+    ABMutableMultiValue *mv = [[ABMutableMultiValue alloc] init];
+    [mv addValue:self.email withLabel:kABEmailWorkLabel];
+    [mv setPrimaryIdentifier:kABEmailWorkLabel];
+    [newPerson setValue:mv forProperty:kABEmailProperty];
+    [mv release];
+  }
+  
+  if (self.telephone) {
+    ABMutableMultiValue *mv = [[ABMutableMultiValue alloc] init];
+    [mv addValue:self.telephone withLabel:kABPhoneWorkLabel];
+    [mv setPrimaryIdentifier:kABPhoneWorkLabel];
+    [newPerson setValue:mv forProperty:kABPhoneProperty];
+    [mv release];
+  }
+  
+  if (self.address) {
+    ABMutableMultiValue *mv = [[ABMutableMultiValue alloc] init];
+    NSMutableDictionary *wAddr = [NSMutableDictionary dictionary];
+    [wAddr setObject:self.address forKey: kABAddressStreetKey];
+    [mv addValue:wAddr withLabel:kABAddressWorkLabel];
+    [mv setPrimaryIdentifier:kABAddressWorkLabel];
+    [newPerson setValue:mv forProperty:kABAddressProperty];
+    [mv release];
+  }
+  
+  [newPerson setValue:self.surname forProperty:kABNoteProperty];
+  
   return [newPerson vCardRepresentation];
+}
+
+- (NSString *)name
+{
+  if (self.firstname && self.surname)
+    return [NSString stringWithFormat:@"%@ %@", self.firstname, self.surname];
+  else
+    return self.displayName;
 }
 
 @end

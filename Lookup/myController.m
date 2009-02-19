@@ -42,7 +42,10 @@ NSString * const DRSSearchString = @"SearchString";
     self.contactList = contactList;
     [pi startAnimation:sender];
     NSTask *task = [[NSTask alloc] init];
-/*
+    
+    NSArray *searchkeys = [NSArray arrayWithObjects:@"givenName", @"division", @"sn", @"displayName", @"mail", @"title", 
+                     @"telephoneNumber", @"mailNickname", @"employeeID", @"physicalDeliveryOfficeName", nil];
+
     [task setLaunchPath:@"/usr/bin/ldapsearch"];
     
     NSString *cmdString = [NSString stringWithFormat:[[NSUserDefaults standardUserDefaults] stringForKey:DRSSearchString], 
@@ -53,11 +56,12 @@ NSString * const DRSSearchString = @"SearchString";
                      @"-z", [[NSUserDefaults standardUserDefaults] stringForKey:DSRMaxResults], 
                      @"-h", [[NSUserDefaults standardUserDefaults] stringForKey:DSRLdapServer],
                      @"-b", [[NSUserDefaults standardUserDefaults] stringForKey:DSRBaseSearch],
-                     cmdString, @"displayName", @"mail", @"mailNickname", @"title", @"telephoneNumber", @"employeeID",
+                     cmdString, @"givenName", @"division", @"sn", @"displayName", @"mail", @"mailNickname", 
+                     @"title", @"telephoneNumber", @"employeeID", @"physicalDeliveryOfficeName",
                      nil];
-*/
-    [task setLaunchPath:@"/bin/cat"];
-    NSArray *args = [NSArray arrayWithObjects:@"/Users/duncan/dump.txt", nil];
+
+    //[task setLaunchPath:@"/bin/cat"];
+    //NSArray *args = [NSArray arrayWithObjects:@"/Users/duncan/dump.txt", nil];
 
     NSPipe *outpipe = [[NSPipe alloc] init];
     NSPipe *errorOutpipe = [[NSPipe alloc] init];
@@ -95,10 +99,7 @@ NSString * const DRSSearchString = @"SearchString";
       for (NSString *line in lines) {
         NSArray *fields = [line componentsSeparatedByString:@"\n"];
         for (NSString *field in fields) {
-          NSArray *keys = [NSArray arrayWithObjects:@"displayName", @"mail", @"title", 
-                           @"telephoneNumber", @"mailNickname", @"employeeID", nil];
-          
-          for (NSString *key in keys) {
+          for (NSString *key in searchkeys) {
             if ([field hasPrefix:[key stringByAppendingString:@": "]] == YES) {
               NSString *str = [field stringAfterSeparator:@": "];
               if ([str length] < 2)
