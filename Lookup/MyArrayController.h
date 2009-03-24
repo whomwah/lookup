@@ -8,11 +8,12 @@
 
 #import <Cocoa/Cocoa.h>
 
+@class MyTableView;
 
 @interface MyArrayController : NSArrayController {
-	IBOutlet NSTableView *tableView;
+	IBOutlet MyTableView *tableView;
 }
 
-//- (BOOL)tableView:(NSTableView *)aTableView writeRowsWithIndexes:(NSIndexSet *)rowIndexes toPasteboard:(NSPasteboard*)pboard;
+- (BOOL)tableView:(NSTableView *)tv writeRowsWithIndexes:(NSIndexSet *)rowIndexes toPasteboard:(NSPasteboard*)pboard;
 
 @end

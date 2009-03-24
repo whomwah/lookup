@@ -7,8 +7,8 @@
 //
 
 #import "AppController.h"
-#import "PreferencesWindowController.h"
 #import "MyController.h"
+#import "PreferencesWindowController.h"
 
 @implementation AppController
 
@@ -31,6 +31,17 @@
     preferencesWindowController = [[PreferencesWindowController alloc] init];
 	}
 	[preferencesWindowController showWindow:self];
+}
+
+- (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication*)sender
+{
+	return YES;
+}
+
+- (void)dealloc
+{
+	[preferencesWindowController release];
+	[super dealloc];
 }
 
 - (IBAction)whatIsLdap:(id)sender

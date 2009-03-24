@@ -18,5 +18,6 @@
 - (void)highlightSelectionInClipRect:(NSRect)theClipRect;
 - (IBAction)copy:(id)sender;
 - (void)writeToPasteboard:(NSPasteboard*)pb;
+- (NSDragOperation)draggingSourceOperationMaskForLocal:(BOOL)isLocal;
 
 @end

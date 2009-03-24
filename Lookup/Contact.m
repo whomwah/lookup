@@ -55,7 +55,7 @@
       self.title = @"Job Title Unknown";
     // Address
     if ([dict valueForKey:@"physicalDeliveryOfficeName"])
-      self.address = [dict valueForKey:@"physicalDeliveryOfficeName"];    
+      self.address = [dict valueForKey:@"physicalDeliveryOfficeName"];
 	}
 	return self;
 }
@@ -73,6 +73,7 @@
   [newPerson setValue:self.surname forProperty:kABLastNameProperty];
   [newPerson setValue:self.title forProperty:kABJobTitleProperty];
   [newPerson setValue:@"BBC" forProperty:kABOrganizationProperty];
+  [newPerson setValue:kABShowAsPerson forProperty:kABPersonFlags];
   
   if (self.division)
     [newPerson setValue:self.division forProperty:kABDepartmentProperty];
@@ -103,7 +104,9 @@
     [mv release];
   }
   
-  [newPerson setValue:self.surname forProperty:kABNoteProperty];
+  if (self.staffid) {
+    [newPerson setValue:self.staffid forProperty:kABNoteProperty];
+  }
   
   return [newPerson vCardRepresentation];
 }

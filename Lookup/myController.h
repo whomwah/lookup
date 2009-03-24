@@ -20,6 +20,7 @@ extern NSString * const DRSSearchString;
   IBOutlet NSSearchField *searchField;
   IBOutlet NSProgressIndicator *pi;
   IBOutlet NSTextField *statusText;
+  NSDockTile *dockTile;
 }
 
 @property(nonatomic, retain) NSMutableArray *contactList;

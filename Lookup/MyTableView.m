@@ -57,49 +57,18 @@
 {
   NSString *str = [[[[self tableColumnWithIdentifier:@"theTableColumn"] 
       dataCellForRow:[self selectedRow]] objectValue] stringRepresentation];
-  
+
   [pb declareTypes:[NSArray arrayWithObject:NSStringPboardType] owner:self];
   [pb setString:str forType:NSStringPboardType];
+
 }
 
-- (void)mouseDown:(NSEvent *)event
+- (NSImage *)dragImageForRowsWithIndexes:(NSIndexSet *)dragRows 
+                            tableColumns:(NSArray *)tableColumns 
+                                   event:(NSEvent *)dragEvent 
+                                  offset:(NSPointPointer)dragImageOffset
 {
-  //[super mouseDown:event];
-  [event retain];
-  [mouseDownEvent release];
-  mouseDownEvent = event;
-}
-
-- (void)mouseDragged:(NSEvent *)event
-{
-  NSLog(@"I'm called");
-  
-  NSPoint down = [mouseDownEvent locationInWindow];
-  NSPoint drag = [event locationInWindow];
-  float distance = hypot(down.x - drag.x, down.x - drag.y);
-  
-  if (distance < 10) {
-    return;
-  }
-  
-  NSString *str = [[[[self tableColumnWithIdentifier:@"theTableColumn"] 
-                     dataCellForRow:[self selectedRow]] objectValue] stringRepresentation];
-  
-  if ([str length] == 0) {
-    return;
-  }
-  
-  NSPoint p = [self convertPointToBase:down];
-  NSPasteboard *pb = [NSPasteboard pasteboardWithName:NSDragPboard];
-  
-  [self writeToPasteboard:pb];
-  [self dragImage:[[NSWorkspace sharedWorkspace] iconForFileType:@"vcf"]
-               at:p
-           offset:NSZeroSize
-            event:mouseDownEvent
-       pasteboard:pb
-           source:self
-        slideBack:YES];
+  return [[NSWorkspace sharedWorkspace] iconForFileType:@"vcf"];
 }
 
 - (NSDragOperation)draggingSourceOperationMaskForLocal:(BOOL)isLocal

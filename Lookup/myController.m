@@ -30,12 +30,15 @@ NSString * const DRSSearchString = @"SearchString";
 - (void) awakeFromNib {	
 	MyCell *cell = [[[MyCell alloc] init] autorelease];
 	[[contactTable tableColumnWithIdentifier:@"theTableColumn"] setDataCell:cell];
+  [contactTable registerForDraggedTypes:[NSArray arrayWithObject:NSStringPboardType]];
+  dockTile = [NSApp dockTile];
 }
 
 - (IBAction)startSearch:(id)sender
 {
   NSString *searchString = [sender stringValue];
   [self updateStatusTextWith:@""];
+  [dockTile setBadgeLabel:nil];
   
   if ([searchString isEqualToString:@""] == NO) {
     [contactList removeAllObjects];
@@ -43,10 +46,11 @@ NSString * const DRSSearchString = @"SearchString";
     [pi startAnimation:sender];
     NSTask *task = [[NSTask alloc] init];
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+
     
     NSArray *searchkeys = [NSArray arrayWithObjects:@"givenName", @"division", @"sn", @"displayName", @"mail", @"title", 
                      @"telephoneNumber", @"mailNickname", @"employeeID", @"physicalDeliveryOfficeName", nil];
-
+/*
     [task setLaunchPath:@"/usr/bin/ldapsearch"];
     
     NSString *cmdString = [NSString stringWithFormat:[ud stringForKey:DRSSearchString], 
@@ -60,9 +64,9 @@ NSString * const DRSSearchString = @"SearchString";
                      cmdString, @"givenName", @"division", @"sn", @"displayName", @"mail", @"mailNickname", 
                      @"title", @"telephoneNumber", @"employeeID", @"physicalDeliveryOfficeName",
                      nil];
-
-    //[task setLaunchPath:@"/bin/cat"];
-    //NSArray *args = [NSArray arrayWithObjects:@"/Users/duncan/dump.txt", nil];
+*/
+    [task setLaunchPath:@"/bin/cat"];
+    NSArray *args = [NSArray arrayWithObjects:@"/Users/duncan/dump.txt", nil];
 
     NSPipe *outpipe = [[NSPipe alloc] init];
     NSPipe *errorOutpipe = [[NSPipe alloc] init];
@@ -121,12 +125,14 @@ NSString * const DRSSearchString = @"SearchString";
           [contactList addObject:c];
           [c release];
           [contactDict removeAllObjects];
+          [dockTile setBadgeLabel:nil];
         }
         
         has_result = 0;
       }
       
-      self.contactList = contactList;    
+      self.contactList = contactList;   
+      [dockTile setBadgeLabel:[NSString stringWithFormat:@"%d", [contactList count]]];
       [self updateStatusTextWith:[NSString stringWithFormat:@"%d results found", [contactList count]]];
       
     } else {
@@ -151,19 +157,8 @@ NSString * const DRSSearchString = @"SearchString";
 
 - (void)updateStatusTextWith:(NSString*)str
 {
-  NSShadow *shadow = [[NSShadow alloc] init];
-  [shadow setShadowColor:[NSColor colorWithDeviceWhite:1.0 alpha:0.5]];
-  [shadow setShadowOffset:NSMakeSize(1.0, -1.1)];
-  
-  NSMutableDictionary *sAttribs = [[[NSMutableDictionary alloc] initWithObjectsAndKeys:
-                        [NSFont systemFontOfSize:11.0],NSFontAttributeName,
-                        shadow, NSShadowAttributeName,
-                        nil] autorelease];
-  [shadow release];
-  
-  NSAttributedString *s = [[NSAttributedString alloc] initWithString:str attributes:sAttribs];
-  [statusText setAttributedStringValue:s];
-  [s release];
+  [[statusText cell] setBackgroundStyle:NSBackgroundStyleRaised];
+  [statusText setStringValue:str];
 }
 
 @end
