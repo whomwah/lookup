@@ -12,6 +12,7 @@
 {
 	NSColor *mHighlightColorInFocusView;
 	NSColor *mHighlightColorOutOfFocusView;
+  NSEvent *mouseDownEvent;
 }
 
 - (void)highlightSelectionInClipRect:(NSRect)theClipRect;
