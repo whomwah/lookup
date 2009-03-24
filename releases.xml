@@ -8,7 +8,7 @@
          <item>
             <title>Version 1.3 (New features, see CHANGELOG)</title>
             <sparkle:releaseNotesLink>
-             http://devtools.ips.radio.bbc.co.uk/ips_toolkit/browser/trunk/experiments/cocoa_apps/Lookup/CHANGELOG 
+             http://devtools.ips.radio.bbc.co.uk/ips_toolkit/browser/trunk/experiments/cocoa_apps/Lookup/CHANGELOG?format=raw 
             </sparkle:releaseNotesLink>
             <pubDate>Tue, 24 Mar 2009 14:00:00 +0000</pubDate>
             <enclosure url="http://svn.ips.radio.bbc.co.uk/rmi_svn/trunk/experiments/cocoa_apps/Lookup/releases/latest/Lookup.dmg" sparkle:version="1.3" length="941281" type="application/octet-stream" sparkle:dsaSignature="MC0CFBEVE9HtzI4Ju/YsZhbcLIkLO5qPAhUAobhITp+MQRI3L8HldQlSZIvy6Is=" />
