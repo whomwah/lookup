@@ -664,6 +664,7 @@
 				<string key="NSScreenRect">{{0, 0}, {1680, 1028}}</string>
 				<string key="NSMinSize">{260, 382}</string>
 				<string key="NSMaxSize">{380, 822}</string>
+				<string key="NSFrameAutosaveName">DefaultWindowSize</string>
 			</object>
 			<object class="NSCustomObject" id="37774003">
 				<string key="NSClassName">MyController</string>
