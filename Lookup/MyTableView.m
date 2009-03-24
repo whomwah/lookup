@@ -76,4 +76,17 @@
   return NSDragOperationCopy;
 }
 
+- (void)mouseDown:(NSEvent *)event
+{
+  [super mouseDown:event];
+  if([event clickCount] == 2) {
+    NSString *str = [[[[self tableColumnWithIdentifier:@"theTableColumn"] 
+                       dataCellForRow:[self selectedRow]] objectValue] stringRepresentation];
+    NSString *encodedTo = [str stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSString *encodedURLString = [NSString stringWithFormat:@"mailto:%@", encodedTo];
+    NSURL *mailtoURL = [NSURL URLWithString:encodedURLString];
+    [[NSWorkspace sharedWorkspace] openURL:mailtoURL];
+  }
+}
+
 @end

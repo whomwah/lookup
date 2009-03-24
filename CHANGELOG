@@ -1,3 +1,13 @@
+*1.3.0* (Mar 24th, 2009)
+
+* icon badge now shows result count
+* double clicking on a result opens a new email
+* dragging a result into your address book will
+  now work with new parameters added for staffId
+  and BBC login
+* red close button now works
+* zoom now works
+
 *1.2.0* (Feb 19th, 2009)
 
 * First Stab at vCard integration

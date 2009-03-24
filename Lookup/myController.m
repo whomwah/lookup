@@ -50,7 +50,7 @@ NSString * const DRSSearchString = @"SearchString";
     
     NSArray *searchkeys = [NSArray arrayWithObjects:@"givenName", @"division", @"sn", @"displayName", @"mail", @"title", 
                      @"telephoneNumber", @"mailNickname", @"employeeID", @"physicalDeliveryOfficeName", nil];
-/*
+
     [task setLaunchPath:@"/usr/bin/ldapsearch"];
     
     NSString *cmdString = [NSString stringWithFormat:[ud stringForKey:DRSSearchString], 
@@ -64,9 +64,9 @@ NSString * const DRSSearchString = @"SearchString";
                      cmdString, @"givenName", @"division", @"sn", @"displayName", @"mail", @"mailNickname", 
                      @"title", @"telephoneNumber", @"employeeID", @"physicalDeliveryOfficeName",
                      nil];
-*/
-    [task setLaunchPath:@"/bin/cat"];
-    NSArray *args = [NSArray arrayWithObjects:@"/Users/duncan/dump.txt", nil];
+
+//    [task setLaunchPath:@"/bin/cat"];
+//    NSArray *args = [NSArray arrayWithObjects:@"/Users/duncan/dump.txt", nil];
 
     NSPipe *outpipe = [[NSPipe alloc] init];
     NSPipe *errorOutpipe = [[NSPipe alloc] init];

@@ -68,7 +68,7 @@
 - (NSData*)vCardDataRepresentation
 {   
   ABPerson *newPerson = [[[ABPerson alloc] init] autorelease];
-  
+
   [newPerson setValue:self.firstname forProperty:kABFirstNameProperty];
   [newPerson setValue:self.surname forProperty:kABLastNameProperty];
   [newPerson setValue:self.title forProperty:kABJobTitleProperty];
@@ -104,8 +104,15 @@
     [mv release];
   }
   
-  if (self.staffid) {
-    [newPerson setValue:self.staffid forProperty:kABNoteProperty];
+  if (self.staffid || self.uid) {
+    ABMutableMultiValue *mv = [[ABMutableMultiValue alloc] init];
+    if (self.staffid) 
+      [mv addValue:self.staffid withLabel:@"staffId"];
+    if (self.uid) 
+      [mv addValue:self.uid withLabel:@"login"];
+    
+    [newPerson setValue:mv forProperty:kABRelatedNamesProperty];
+    [mv release];
   }
   
   return [newPerson vCardRepresentation];
