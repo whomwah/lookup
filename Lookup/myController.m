@@ -52,7 +52,7 @@ NSString * const DRSSearchString = @"SearchString";
                      @"telephoneNumber", @"mailNickname", @"employeeID", @"physicalDeliveryOfficeName", nil];
 
     [task setLaunchPath:@"/usr/bin/ldapsearch"];
-    
+
     NSString *cmdString = [NSString stringWithFormat:[ud stringForKey:DRSSearchString], 
                            searchString, searchString, searchString, searchString, searchString];
     NSArray *args = [NSArray arrayWithObjects:@"-Q", @"-LLL",
