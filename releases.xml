@@ -6,12 +6,12 @@
       <description>Most recent changes to Lookup with links to updates.</description>
       <language>en</language>
          <item>
-            <title>Version 1.4 (show/hide support)</title>
+            <title>Version 1.5 (clear list too)</title>
             <sparkle:releaseNotesLink>
              http://devtools.ips.radio.bbc.co.uk/ips_toolkit/browser/trunk/experiments/cocoa_apps/Lookup/CHANGELOG?format=raw 
             </sparkle:releaseNotesLink>
-            <pubDate>Mon, 30 Mar 2009 17:00:00 +0000</pubDate>
-            <enclosure url="http://svn.ips.radio.bbc.co.uk/rmi_svn/trunk/experiments/cocoa_apps/Lookup/releases/latest/Lookup.dmg" sparkle:version="1.4" length="941419" type="application/octet-stream" sparkle:dsaSignature="MC0CFQCvZD2s1f/hb84ocMCIlxgnywhOWQIUU2f8Lid/xdXCIr9Z1eot2kTqlVQ=" />
+            <pubDate>Mon, 31 Mar 2009 10:00:00 +0000</pubDate>
+            <enclosure url="http://svn.ips.radio.bbc.co.uk/rmi_svn/trunk/experiments/cocoa_apps/Lookup/releases/latest/Lookup.dmg" sparkle:version="1.5" length="941376" type="application/octet-stream" sparkle:dsaSignature="MC0CFA21rffmlUUjS2dxGvoemKLnXYhUAhUAxatgDwmtMbYAhUNUZ5hUKjXM8+8=" />
          </item>
    </channel>
 </rss>

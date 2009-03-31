@@ -39,10 +39,10 @@ NSString * const DRSSearchString = @"SearchString";
   NSString *searchString = [sender stringValue];
   [self updateStatusTextWith:@""];
   [dockTile setBadgeLabel:nil];
+  [contactList removeAllObjects];
+  self.contactList = contactList;
   
   if ([searchString isEqualToString:@""] == NO) {
-    [contactList removeAllObjects];
-    self.contactList = contactList;
     [pi startAnimation:sender];
     NSTask *task = [[NSTask alloc] init];
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
