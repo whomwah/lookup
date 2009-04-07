@@ -22,6 +22,7 @@
 		AE5ADB4E0F3CD3C5003BF7CC /* Contact.m in Sources */ = {isa = PBXBuildFile; fileRef = AE5ADB4B0F3CD3C5003BF7CC /* Contact.m */; };
 		AE5ADB4F0F3CD3C5003BF7CC /* MyController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE5ADB4D0F3CD3C5003BF7CC /* MyController.m */; };
 		AE5ADBF40F3E0D55003BF7CC /* MyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE5ADBF30F3E0D55003BF7CC /* MyCell.m */; };
+		AEB73D720F8B5BFB008DE1C5 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = AEB73D710F8B5BFB008DE1C5 /* Credits.rtf */; };
 		AEE95A580F3F7D5F00CE7329 /* NSColorAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE95A570F3F7D5F00CE7329 /* NSColorAdditions.m */; };
 		AEE95A600F3F7DCC00CE7329 /* MyTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE95A5F0F3F7DCC00CE7329 /* MyTableView.m */; };
 		AEE9FF010F4D53C1007F2D56 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEE9FF000F4D53C1007F2D56 /* AddressBook.framework */; };
@@ -67,6 +68,7 @@
 		AE5ADB4D0F3CD3C5003BF7CC /* MyController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyController.m; sourceTree = "<group>"; };
 		AE5ADBF20F3E0D55003BF7CC /* MyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCell.h; sourceTree = "<group>"; };
 		AE5ADBF30F3E0D55003BF7CC /* MyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCell.m; sourceTree = "<group>"; };
+		AEB73D710F8B5BFB008DE1C5 /* Credits.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Credits.rtf; sourceTree = "<group>"; };
 		AEE95A560F3F7D5F00CE7329 /* NSColorAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSColorAdditions.h; sourceTree = "<group>"; };
 		AEE95A570F3F7D5F00CE7329 /* NSColorAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSColorAdditions.m; sourceTree = "<group>"; };
 		AEE95A5E0F3F7DCC00CE7329 /* MyTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyTableView.h; sourceTree = "<group>"; };
@@ -159,6 +161,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				AEB73D710F8B5BFB008DE1C5 /* Credits.rtf */,
 				AE0B91E50F49EF0F00FA18E7 /* dsa_pub.pem */,
 				1DDD58140DA1D0A300B32029 /* MainMenu.xib */,
 				AE0B91620F49EA3900FA18E7 /* Preferences.xib */,
@@ -258,6 +261,7 @@
 				AE4651E70F49B4FF00C1481E /* bbclookup.icns in Resources */,
 				AE0B91630F49EA3900FA18E7 /* Preferences.xib in Resources */,
 				AE0B91E60F49EF0F00FA18E7 /* dsa_pub.pem in Resources */,
+				AEB73D720F8B5BFB008DE1C5 /* Credits.rtf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
